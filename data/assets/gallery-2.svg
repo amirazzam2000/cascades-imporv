@@ -1,0 +1,15 @@
+﻿<svg width="900" height="700" viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="" />
+      <stop offset="100%" stop-color="" />
+    </linearGradient>
+  </defs>
+  <rect width="900" height="700" rx="28" fill="url(#grad)" />
+  <circle cx="150" cy="200" r="60" fill="rgba(255,255,255,0.12)" />
+  <circle cx="720" cy="160" r="90" fill="rgba(255,255,255,0.16)" />
+  <path d="M140 430 Q 260 360 420 420 T 770 390" stroke="rgba(255,255,255,0.55)" stroke-width="14" fill="none" stroke-linecap="round" />
+  <text x="50%" y="55%" text-anchor="middle" fill="#fff7f1" font-family="'DM Sans','Trebuchet MS',sans-serif" font-size="42" font-weight="700">
+    
+  </text>
+</svg>

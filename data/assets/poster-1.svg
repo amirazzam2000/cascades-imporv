@@ -1,0 +1,14 @@
+﻿<svg width="800" height="1100" viewBox="0 0 800 1100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="" />
+      <stop offset="100%" stop-color="" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1100" rx="48" fill="url(#grad)" />
+  <circle cx="180" cy="220" r="90" fill="rgba(255,255,255,0.22)" />
+  <circle cx="640" cy="320" r="120" fill="rgba(255,255,255,0.18)" />
+  <path d="M120 620 Q 320 520 500 580 T 760 540" stroke="rgba(255,255,255,0.65)" stroke-width="22" fill="none" stroke-linecap="round" />
+  <text x="50%" y="50%" text-anchor="middle" fill="#1b1230" font-family="'Manrope','Trebuchet MS',sans-serif" font-size="64" font-weight="800" letter-spacing="2"></text>
+  <text x="50%" y="56%" text-anchor="middle" fill="#1b1230" font-family="'Manrope','Trebuchet MS',sans-serif" font-size="28" font-weight="700" opacity="0.8">Drop your poster image here</text>
+</svg>

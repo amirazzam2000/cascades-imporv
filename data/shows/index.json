@@ -1,0 +1,31 @@
+﻿{
+  "upcoming": [
+    {
+      "title": "Midnight Metro",
+      "date": "2026-02-22T20:00:00",
+      "venue": "The Lantern",
+      "city": "Brooklyn, NY",
+      "description": "A fast-paced montage with live keys and audience-sourced secrets.",
+      "ticketUrl": "https://tickets.example.com/midnight-metro",
+      "poster": "data/assets/poster-1.svg"
+    },
+    {
+      "title": "Block Party",
+      "date": "2026-03-05T21:00:00",
+      "venue": "North Star Stage",
+      "city": "Queens, NY",
+      "description": "We build an entire neighborhood from a single suggestion.",
+      "ticketUrl": "https://tickets.example.com/block-party",
+      "poster": "data/assets/poster-2.svg"
+    },
+    {
+      "title": "Spontaneous Combustion",
+      "date": "2026-03-21T19:30:00",
+      "venue": "Civic Loft",
+      "city": "Manhattan, NY",
+      "description": "Long-form narrative with guest monologist and surprise games.",
+      "ticketUrl": "https://tickets.example.com/spontaneous",
+      "poster": "data/assets/poster-3.svg"
+    }
+  ]
+}

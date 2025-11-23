@@ -1,0 +1,87 @@
+﻿<!doctype html>
+<html lang="en" data-page="landing">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cascades | Improv Collective</title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <script type="module" src="scripts/main.js"></script>
+</head>
+<body>
+  <div class="ambient"></div>
+  <header class="topbar">
+    <div class="brand-block">
+      <div class="brand" id="brand">Cascades</div>
+      <div class="brand-tagline" id="brand-tagline">Improv that flows wherever it wants.</div>
+    </div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav-links"></nav>
+  </header>
+  <main class="page">
+    <section class="hero hero-full">
+      <img id="hero-image" class="hero-bg" src="data/assets/hero-cover.svg" alt="Cascades improv on stage" />
+      <div class="hero-copy">
+        <p class="eyebrow" id="hero-eyebrow">Live improv</p>
+        <h1 id="hero-title">Cascades</h1>
+        <p class="lede" id="hero-description">Improv that flows wherever it wants - warm, musical, and made from your stories.</p>
+        <div class="hero-actions">
+          <a class="btn" id="hero-cta-primary" href="shows.html">See upcoming shows</a>
+          <a class="ghost" id="hero-cta-secondary" href="about.html">Meet the troupe</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="about-block">
+      <div class="panel-head">
+        <h2>About Cascades</h2>
+      </div>
+      <p id="about-paragraph">We start with you - your stories, your city - and build warm, chaotic improv runs that feel like home.</p>
+    </section>
+
+    <section class="panel" id="people">
+      <div class="panel-head">
+        <h2>People</h2>
+        <p>Meet the crew up close.</p>
+      </div>
+      <div class="grid grid-members" id="people-grid"></div>
+    </section>
+
+    <section class="panel panel-gallery" id="gallery">
+      <div class="panel-head">
+        <h2>Moments we love</h2>
+        <p>Little snapshots from the chaos.</p>
+      </div>
+      <div class="grid grid-gallery" id="gallery-grid"></div>
+    </section>
+
+    <section class="panel" id="testimonials">
+      <div class="panel-head">
+        <h2>Things people say</h2>
+      </div>
+      <div class="grid grid-testimonials" id="testimonial-list"></div>
+    </section>
+
+    <section class="panel" id="next-show">
+      <div class="panel-head">
+        <h2>Next stop</h2>
+        <p id="next-show-summary">We'll drop our newest set soon.</p>
+      </div>
+      <div class="grid" id="next-show-card"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div id="footer-brand">Cascades</div>
+    <div id="footer-contact"></div>
+  </footer>
+
+  <div class="modal-overlay" id="modal-overlay" hidden>
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modal-close" aria-label="Close details">&times;</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+</body>
+</html>

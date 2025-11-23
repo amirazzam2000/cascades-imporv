@@ -1,0 +1,12 @@
+﻿:root {
+  --bg: #20133a;
+  --bg-2: #2c1c4f;
+  --panel: rgba(255, 255, 255, 0.1);
+  --muted: #f4eaff;
+  --text: #fffdf8;
+  --accent: #ffc77a;
+  --accent-2: #e5a0ff;
+  --stroke: rgba(255, 255, 255, 0.2);
+  --shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
+  font-family: "Manrope", "Nunito", "Trebuchet MS", "Helvetica Neue", sans-serif;
+}

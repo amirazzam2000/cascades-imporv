@@ -1,0 +1,14 @@
+﻿<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4fe0c8" stop-opacity="0.55" />
+      <stop offset="50%" stop-color="#0a1b1f" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#f9a43f" stop-opacity="0.6" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <rect x="60" y="120" width="1080" height="560" rx="32" fill="rgba(7,16,20,0.6)" stroke="rgba(255,255,255,0.15)" />
+  <text x="50%" y="50%" text-anchor="middle" fill="#e7f4f7" font-family="'DM Sans','Trebuchet MS',sans-serif" font-size="36" letter-spacing="2" opacity="0.9">
+    Drop your hero photo at data/assets/hero.svg
+  </text>
+</svg>

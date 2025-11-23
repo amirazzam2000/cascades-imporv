@@ -1,0 +1,9 @@
+{
+  "photos": [
+    { "src": "https://www.instagram.com/cascades.improv/reel/DQ8zK-UDfP7/", "alt": "Backstage laughs" },
+    { "src": "data/assets/gallery-2.svg", "alt": "On-stage duo" },
+    { "src": "data/assets/gallery-3.svg", "alt": "Audience prompts" },
+    { "src": "data/assets/gallery-4.svg", "alt": "Taking a bow" }
+  ],
+  "source": "https://www.instagram.com/cascades.improv/"
+}

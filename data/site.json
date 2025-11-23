@@ -1,0 +1,14 @@
+﻿{
+  "name": "Cascades",
+  "tagline": "",
+  "nav": [
+    { "label": "Home", "href": "index.html" },
+    { "label": "Shows", "href": "shows.html" },
+    { "label": "About", "href": "about.html" },
+    { "label": "Photos", "href": "photos.html" }
+  ],
+  "contact": {
+    "email": "hi@cascadesimprov.com",
+    "instagram": "https://instagram.com/cascadesimprov"
+  }
+}
