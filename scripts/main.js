@@ -18,15 +18,7 @@ async function init() {
   wireModal();
   wireMenu();
 
-  if (page === "landing") {
-    await renderLanding(site);
-  } else if (page === "shows") {
-    await renderShows();
-  } else if (page === "about") {
-    await renderMembers();
-  } else if (page === "photos") {
-    await renderPhotos();
-  }
+  await renderLanding(site);
 }
 
 async function loadSiteData() {
@@ -34,10 +26,10 @@ async function loadSiteData() {
     name: "Cascades",
     tagline: "Improv that flows wherever it wants.",
     nav: [
-      { label: "Home", href: "index.html" },
-      { label: "Shows", href: "shows.html" },
-      { label: "About", href: "about.html" },
-      { label: "Photos", href: "photos.html" }
+      { label: "Home", href: "#top" },
+      { label: "Shows", href: "#shows" },
+      { label: "About", href: "#about" },
+      { label: "Photos", href: "#photos" }
     ],
     contact: { email: "hi@cascadesimprov.com" }
   };
@@ -56,13 +48,15 @@ function renderNav(site) {
   if (brandTaglineEl) brandTaglineEl.textContent = site.tagline;
   if (!navLinksEl) return;
   navLinksEl.innerHTML = "";
+  const currentHash = window.location.hash;
   site.nav.forEach((item) => {
     const link = document.createElement("a");
     link.href = item.href;
     link.textContent = item.label;
-    if ((page === "landing" && item.href.includes("index")) || item.href.includes(page)) {
-      link.classList.add("active");
-    }
+    const isAnchor = item.href.startsWith("#");
+    const matchesHash = isAnchor && currentHash === item.href;
+    const matchesPage = !isAnchor && ((page === "landing" && item.href.includes("index")) || item.href.includes(page));
+    if (matchesHash || matchesPage || (isAnchor && !currentHash && item.href === "#top")) link.classList.add("active");
     navLinksEl.appendChild(link);
   });
 }
@@ -99,7 +93,6 @@ async function renderLanding(site) {
   const secondaryCta = document.getElementById("hero-cta-secondary");
   const nextShowCard = document.getElementById("next-show-card");
   const nextShowSummary = document.getElementById("next-show-summary");
-  const galleryGrid = document.getElementById("gallery-grid");
   const peopleGrid = document.getElementById("people-grid");
   const aboutParagraph = document.getElementById("about-paragraph");
   const testimonialList = document.getElementById("testimonial-list");
@@ -122,9 +115,9 @@ async function renderLanding(site) {
       { src: "data/assets/gallery-4.svg", alt: "Cascades taking a bow" }
     ],
     ctaPrimary: "See shows",
-    ctaPrimaryHref: "shows.html",
+    ctaPrimaryHref: "#shows",
     ctaSecondary: "Meet the troupe",
-    ctaSecondaryHref: "about.html"
+    ctaSecondaryHref: "#about"
   };
 
   let landing = fallback;
@@ -153,15 +146,6 @@ async function renderLanding(site) {
   }
 
   if (aboutParagraph) aboutParagraph.textContent = landing.about;
-
-  if (galleryGrid && landing.gallery) {
-    galleryGrid.innerHTML = "";
-    landing.gallery.forEach((img) => {
-      const figure = document.createElement("div");
-      figure.innerHTML = `<img class="gallery-img" src="${img.src}" alt="${img.alt || "Cascades moment"}" loading="lazy" />`;
-      galleryGrid.appendChild(figure);
-    });
-  }
 
   if (testimonialList && landing.testimonials) {
     testimonialList.innerHTML = "";
@@ -197,6 +181,9 @@ async function renderLanding(site) {
   } catch (err) {
     console.warn("No upcoming shows yet", err);
   }
+
+  await renderShows();
+  await renderPhotos();
 }
 
 async function renderShows() {
@@ -401,9 +388,22 @@ function wireMenu() {
     menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
   });
   navLinksEl.addEventListener("click", (e) => {
-    if (e.target.tagName.toLowerCase() === "a") {
-      navLinksEl.classList.remove("open");
-      menuToggle.setAttribute("aria-expanded", "false");
+    if (e.target.tagName.toLowerCase() !== "a") return;
+    navLinksEl.classList.remove("open");
+    if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+    const href = e.target.getAttribute("href") || "";
+    if (href.startsWith("#")) {
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.history.pushState(null, "", href);
+        navLinksEl.querySelectorAll("a").forEach((link) => {
+          if (href.startsWith("#")) {
+            link.classList.toggle("active", link.getAttribute("href") === href);
+          }
+        });
+      }
     }
   });
 }

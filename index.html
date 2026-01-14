@@ -19,21 +19,21 @@
     </button>
     <nav class="nav" id="nav-links"></nav>
   </header>
-  <main class="page">
-    <section class="hero hero-full">
+  <main class="page" id="top">
+    <section class="hero hero-full" id="home">
       <img id="hero-image" class="hero-bg" src="data/assets/hero-cover.svg" alt="Cascades improv on stage" />
       <div class="hero-copy">
         <p class="eyebrow" id="hero-eyebrow">Live improv</p>
         <h1 id="hero-title">Cascades</h1>
         <p class="lede" id="hero-description">Improv that flows wherever it wants - warm, musical, and made from your stories.</p>
         <div class="hero-actions">
-          <a class="btn" id="hero-cta-primary" href="shows.html">See upcoming shows</a>
-          <a class="ghost" id="hero-cta-secondary" href="about.html">Meet the troupe</a>
+          <a class="btn" id="hero-cta-primary" href="#shows">See upcoming shows</a>
+          <a class="ghost" id="hero-cta-secondary" href="#about">Meet the troupe</a>
         </div>
       </div>
     </section>
 
-    <section class="panel" id="about-block">
+    <section class="panel" id="about">
       <div class="panel-head">
         <h2>About Cascades</h2>
       </div>
@@ -48,19 +48,12 @@
       <div class="grid grid-members" id="people-grid"></div>
     </section>
 
-    <section class="panel panel-gallery" id="gallery">
+    <section class="panel" id="shows">
       <div class="panel-head">
-        <h2>Moments we love</h2>
-        <p>Little snapshots from the chaos.</p>
+        <h2>Upcoming shows</h2>
+        <p>Reserve your seat, then bring your weirdest suggestion.</p>
       </div>
-      <div class="grid grid-gallery" id="gallery-grid"></div>
-    </section>
-
-    <section class="panel" id="testimonials">
-      <div class="panel-head">
-        <h2>Things people say</h2>
-      </div>
-      <div class="grid grid-testimonials" id="testimonial-list"></div>
+      <div class="grid" id="shows-list"></div>
     </section>
 
     <section class="panel" id="next-show">
@@ -69,6 +62,24 @@
         <p id="next-show-summary">We'll drop our newest set soon.</p>
       </div>
       <div class="grid" id="next-show-card"></div>
+    </section>
+
+    <section class="panel panel-gallery" id="photos">
+      <div class="panel-head">
+        <h2>Photos</h2>
+        <p>Recent moments. Add your latest Instagram pulls to the data folder.</p>
+      </div>
+      <div class="hero-actions" style="margin-bottom:14px;">
+        <a class="ghost" id="photos-instagram-link" href="https://instagram.com/cascadesimprov" target="_blank" rel="noopener">View on Instagram</a>
+      </div>
+      <div class="grid grid-gallery" id="photos-grid"></div>
+    </section>
+
+    <section class="panel" id="testimonials">
+      <div class="panel-head">
+        <h2>Things people say</h2>
+      </div>
+      <div class="grid grid-testimonials" id="testimonial-list"></div>
     </section>
   </main>
 

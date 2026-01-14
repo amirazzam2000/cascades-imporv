@@ -1,9 +1,9 @@
 ﻿{
-  "title": "Cascades",
+  "title": "CASCADES",
   "eyebrow": "",
-  "description": "A cozy crew of friends who turn your stories into playful, music-splashed scenes with heart and chaos.",
+  "description": "",
   "heroImage": "data/assets/hero-cover.svg",
-  "about": "Cascades is a warm, playful improv crew that builds shows from your stories, music loops, and the energy in the room.",
+  "about": "This is the description ",
   "testimonials": [
     { "quote": "Felt like hanging out with hilarious friends who happened to make a show.", "name": "Maya P.", "context": "Audience" },
     { "quote": "They made up a full musical about my cat. I cried laughing.", "name": "Jordan V.", "context": "Regular" },
@@ -16,7 +16,7 @@
     { "src": "data/assets/gallery-4.svg", "alt": "Cascades taking a bow" }
   ],
   "ctaPrimary": "See shows",
-  "ctaPrimaryHref": "shows.html",
+  "ctaPrimaryHref": "#shows",
   "ctaSecondary": "Meet the troupe",
-  "ctaSecondaryHref": "about.html"
+  "ctaSecondaryHref": "#about"
 }

@@ -2,10 +2,10 @@
   "name": "Cascades",
   "tagline": "",
   "nav": [
-    { "label": "Home", "href": "index.html" },
-    { "label": "Shows", "href": "shows.html" },
-    { "label": "About", "href": "about.html" },
-    { "label": "Photos", "href": "photos.html" }
+    { "label": "Home", "href": "#top" },
+    { "label": "Shows", "href": "#shows" },
+    { "label": "About", "href": "#about" },
+    { "label": "Photos", "href": "#photos" }
   ],
   "contact": {
     "email": "hi@cascadesimprov.com",

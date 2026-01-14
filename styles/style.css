@@ -12,6 +12,7 @@
 }
 
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
   min-height: 100vh;
@@ -78,6 +79,7 @@ body {
 .eyebrow { letter-spacing: 0.16em; font-size: 0.9rem; text-transform: uppercase; color: var(--accent); margin: 0; }
 
 .panel { margin-top: 42px; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--stroke); border-radius: 20px; padding: 24px; box-shadow: var(--shadow); }
+.hero, .panel { scroll-margin-top: 120px; }
 .panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
 .panel-head h2, .panel-head h1 { margin: 0; letter-spacing: -0.02em; }
 .panel-head p { margin: 4px 0; color: var(--muted); }
