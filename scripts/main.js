@@ -324,7 +324,8 @@ async function getShowsFromSheet(csvUrl) {
         city: pick(row, ["city"]),
         description: pick(row, ["description", "desc"]),
         ticketUrl: pick(row, ["ticketurl", "ticket_url", "ticket", "tickets"]),
-        poster: normalizeSrc(pick(row, ["poster", "image", "imageurl", "image_url"]))
+        poster: normalizeSrc(pick(row, ["poster", "image", "imageurl", "image_url", "full", "fullposter"])),
+        thumbnail: normalizeSrc(pick(row, ["thumbnail", "thumb", "thumburl", "thumb_url"]))
       }))
       .filter((s) => s.title && s.date);
     const sorted = shows.sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -458,8 +459,9 @@ function driveThumbnail(id) {
 function buildShowCard(show, highlight = false) {
   const card = document.createElement("div");
   card.className = "card";
+  const posterSrc = show.thumbnail || show.poster;
   card.innerHTML = `
-    ${show.poster ? `<img class="show-poster" src="${show.poster}" alt="${show.title} poster" loading="lazy" />` : ""}
+    ${posterSrc ? `<img class="show-poster" src="${posterSrc}" alt="${show.title} poster" loading="lazy" />` : ""}
     <div class="tag">${formatDate(show.date)}</div>
     <h3>${show.title}</h3>
     <p>${show.venue}${show.city ? ` - ${show.city}` : ""}</p>
@@ -499,8 +501,9 @@ function formatDate(dateInput) {
 }
 
 function openShowModal(show) {
+  const posterSrc = show.poster || show.thumbnail;
   const body = `
-    ${show.poster ? `<img class="show-poster" src="${show.poster}" alt="${show.title} poster" />` : ""}
+    ${posterSrc ? `<img class="show-poster" src="${posterSrc}" alt="${show.title} poster" />` : ""}
     <h3>${show.title}</h3>
     <p><strong>When:</strong> ${formatDate(show.date)}</p>
     <p><strong>Where:</strong> ${show.venue}${show.city ? ` - ${show.city}` : ""}</p>

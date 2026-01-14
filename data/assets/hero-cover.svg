@@ -1,16 +1,37 @@
-﻿<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 640" role="img" aria-labelledby="title desc">
+  <title id="title">Cascades neon banner</title>
+  <desc id="desc">Neon outline text reading Cascades on a rainbow gradient background</desc>
   <defs>
-    <linearGradient id="river" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3b0d4a" />
-      <stop offset="50%" stop-color="#a845c8" />
-      <stop offset="100%" stop-color="#ff9f1c" />
+    <linearGradient id="bg" x1="0%" x2="100%" y1="50%" y2="50%">
+      <stop offset="0%" stop-color="#2b5cff"/>
+      <stop offset="18%" stop-color="#28c3ff"/>
+      <stop offset="36%" stop-color="#2cf2a3"/>
+      <stop offset="52%" stop-color="#f6f75e"/>
+      <stop offset="68%" stop-color="#ffa22f"/>
+      <stop offset="84%" stop-color="#ff3ca6"/>
+      <stop offset="100%" stop-color="#ad1aff"/>
     </linearGradient>
+    <pattern id="texture" x="0" y="0" width="160" height="160" patternUnits="userSpaceOnUse">
+      <rect width="160" height="160" fill="url(#bg)" opacity="0.05"/>
+      <path d="M20 10h40m20 22h60m-10 22h40m-120 30h70m30 18h50m-90 22h110" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.08"/>
+      <path d="M10 40l12 6m18 24l10 8m20 14l12 6m20 16l14 8" stroke="#000" stroke-width="2" stroke-linecap="round" opacity="0.08"/>
+    </pattern>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="1600" height="900" fill="#1b0b24" />
-  <path d="M-20 260 C 220 180 520 320 760 260 C 980 200 1260 260 1600 200 L 1600 900 L -20 900 Z" fill="url(#river)" opacity="0.62" />
-  <path d="M-40 540 C 200 470 520 540 780 480 C 1020 420 1280 500 1640 430 L 1640 920 L -40 920 Z" fill="#ffb457" opacity="0.35" />
-  <g fill="#ffdfe9" opacity="0.9" font-family="'DM Sans','Trebuchet MS',sans-serif" font-size="42" font-weight="700" text-anchor="middle">
-    <text x="50%" y="48%">Cascades Improv</text>
-    <text x="50%" y="55%" font-size="26" opacity="0.8">Swap this with your photo: data/assets/hero-cover.svg</text>
+  <rect width="1600" height="640" fill="url(#bg)"/>
+  <rect width="1600" height="640" fill="url(#texture)"/>
+  <rect x="16" y="16" width="1568" height="608" rx="48" ry="48" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="4"/>
+  <g filter="url(#glow)" transform="translate(120 120)">
+    <text x="0" y="320" font-family="'Poppins','Manrope','Trebuchet MS',sans-serif" font-size="280" font-weight="800" letter-spacing="18" fill="none" stroke="#fff" stroke-width="22" stroke-linejoin="round">CASCADES</text>
+    <text x="0" y="320" font-family="'Poppins','Manrope','Trebuchet MS',sans-serif" font-size="280" font-weight="800" letter-spacing="18" fill="none" stroke="#7efbff" stroke-width="10" stroke-linejoin="round" opacity="0.85">CASCADES</text>
+    <text x="0" y="320" font-family="'Poppins','Manrope','Trebuchet MS',sans-serif" font-size="280" font-weight="800" letter-spacing="18" fill="none" stroke="#ffffff" stroke-width="6" stroke-linejoin="round">CASCADES</text>
   </g>
+  <rect width="1600" height="640" fill="rgba(0,0,0,0.04)"/>
 </svg>
