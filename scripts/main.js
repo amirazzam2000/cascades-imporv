@@ -9,10 +9,13 @@ const modalOverlay = document.getElementById("modal-overlay");
 const modalBody = document.getElementById("modal-body");
 const modalClose = document.getElementById("modal-close");
 
+let feeds = {};
+
 init();
 
 async function init() {
   const site = await loadSiteData();
+  feeds = await loadFeeds();
   renderNav(site);
   renderFooter(site);
   wireModal();
@@ -40,6 +43,15 @@ async function loadSiteData() {
   } catch (err) {
     console.warn("Using fallback site data", err);
     return fallback;
+  }
+}
+
+async function loadFeeds() {
+  try {
+    const data = await loadJSON("data/feeds.json");
+    return data;
+  } catch (err) {
+    return {};
   }
 }
 
@@ -167,7 +179,7 @@ async function renderLanding(site) {
   }
 
   try {
-    const shows = await getShows();
+    const shows = feeds.showsCsv ? await getShowsFromSheet(feeds.showsCsv) : await getShows();
     if (shows.length) {
       const next = shows[0];
       if (nextShowSummary) {
@@ -191,7 +203,7 @@ async function renderShows() {
   if (!list) return;
   list.innerHTML = "";
   try {
-    const shows = await getShows();
+    const shows = feeds.showsCsv ? await getShowsFromSheet(feeds.showsCsv) : await getShows();
     if (!shows.length) {
       list.innerHTML = "<p class=\"muted\">No shows booked just yet. Stay tuned!</p>";
       return;
@@ -210,7 +222,7 @@ async function renderPhotos() {
   const note = document.createElement("p");
   note.className = "muted";
   note.style.marginBottom = "10px";
-  note.textContent = "Instagram blocks direct browser pulls; add image URLs in data/instagram/index.json or drop files in data/assets.";
+  // note.textContent = "Instagram blocks direct browser pulls; add image URLs in data/instagram/index.json or drop files in data/assets.";
   grid.parentElement?.insertBefore(note, grid);
   const fallbackPhotos = [
     { src: "data/assets/gallery-1.svg", alt: "Backstage laughs" },
@@ -220,7 +232,7 @@ async function renderPhotos() {
   ];
 
   try {
-    const data = await loadJSON("data/instagram/index.json");
+    const data = feeds.photosCsv ? await getPhotosFromSheet(feeds.photosCsv) : await loadJSON("data/instagram/index.json");
     const photos = data.photos?.length ? data.photos : fallbackPhotos;
     if (instagramLink && data.source) {
       instagramLink.href = data.source;
@@ -301,10 +313,146 @@ async function getShows() {
   return sorted.filter((s) => new Date(s.date) >= new Date());
 }
 
+async function getShowsFromSheet(csvUrl) {
+  try {
+    const rows = await loadCsv(csvUrl);
+    const shows = rows
+      .map((row) => ({
+        title: pick(row, ["title", "name", "show"]),
+        date: pick(row, ["date", "datetime", "when"]),
+        venue: pick(row, ["venue", "where"]),
+        city: pick(row, ["city"]),
+        description: pick(row, ["description", "desc"]),
+        ticketUrl: pick(row, ["ticketurl", "ticket_url", "ticket", "tickets"]),
+        poster: normalizeSrc(pick(row, ["poster", "image", "imageurl", "image_url"]))
+      }))
+      .filter((s) => s.title && s.date);
+    const sorted = shows.sort((a, b) => new Date(a.date) - new Date(b.date));
+    return sorted.filter((s) => new Date(s.date) >= new Date());
+  } catch (err) {
+    console.warn("Falling back to bundled shows; sheet failed", err);
+    return getShows();
+  }
+}
+
+async function getPhotosFromSheet(csvUrl) {
+  try {
+    const rows = await loadCsv(csvUrl);
+    const photos = rows
+      .map((row) => ({
+        src: normalizeSrc(pick(row, ["src", "url", "image", "photo", "link"])),
+        alt: pick(row, ["alt", "caption", "title"])
+      }))
+      .filter((p) => p.src);
+    return { photos };
+  } catch (err) {
+    console.warn("Falling back to bundled photos; sheet failed", err);
+    return loadJSON("data/instagram/index.json");
+  }
+}
+
 async function loadJSON(path) {
   const res = await fetch(path, { cache: "no-store" });
   if (!res.ok) throw new Error(`Could not load ${path}`);
   return res.json();
+}
+
+async function loadCsv(url) {
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Could not load CSV ${url}`);
+  const text = await res.text();
+  return parseCsv(text);
+}
+
+function parseCsv(text) {
+  // Simple CSV parser that handles quoted cells and commas inside quotes.
+  const rows = [];
+  let current = [];
+  let field = "";
+  let inQuotes = false;
+  const input = text.replace(/^\ufeff/, ""); // strip BOM if present
+  for (let i = 0; i < input.length; i++) {
+    const char = input[i];
+    const next = input[i + 1];
+    if (char === '"' && inQuotes && next === '"') {
+      field += '"';
+      i++; // skip the escaped quote
+      continue;
+    }
+    if (char === '"') {
+      inQuotes = !inQuotes;
+      continue;
+    }
+    if (char === "," && !inQuotes) {
+      current.push(field.trim());
+      field = "";
+      continue;
+    }
+    if ((char === "\n" || char === "\r") && !inQuotes) {
+      if (field.length || current.length) {
+        current.push(field.trim());
+        rows.push(current);
+      }
+      current = [];
+      field = "";
+      if (char === "\r" && next === "\n") i++; // handle CRLF
+      continue;
+    }
+    field += char;
+  }
+  if (field.length || current.length) {
+    current.push(field.trim());
+    rows.push(current);
+  }
+  if (!rows.length) return [];
+  const headers = rows
+    .shift()
+    .map((h) => h.trim().toLowerCase().replace(/[^a-z0-9]/g, "")); // normalize header names
+  return rows
+    .filter((r) => r.some((cell) => cell && cell.length))
+    .map((line) =>
+      headers.reduce((obj, key, idx) => {
+        obj[key] = (line[idx] || "").trim();
+        return obj;
+      }, {})
+    );
+}
+
+function pick(obj, keys) {
+  for (const key of keys) {
+    if (obj[key]) return obj[key];
+  }
+  return "";
+}
+
+function normalizeSrc(src) {
+  if (!src) return "";
+  if (src.startsWith("//")) return `https:${src}`;
+  if (/^https?:\/\//i.test(src)) {
+    const driveId = extractGoogleDriveId(src);
+    if (driveId) return driveThumbnail(driveId);
+    return src;
+  }
+  if (src.startsWith("drive.google.com") || src.startsWith("docs.google.com")) {
+    const withProto = `https://${src}`;
+    const driveId = extractGoogleDriveId(withProto);
+    return driveId ? driveThumbnail(driveId) : withProto;
+  }
+  return src; // allow relative paths for local assets
+}
+
+function extractGoogleDriveId(url) {
+  // Handles /file/d/{id}/view, ?id={id}, and open?id={id}
+  const fileMatch = url.match(/\/file\/d\/([^/]+)\//);
+  if (fileMatch && fileMatch[1]) return fileMatch[1];
+  const idParam = new URLSearchParams(url.split("?")[1] || "").get("id");
+  if (idParam) return idParam;
+  return "";
+}
+
+function driveThumbnail(id) {
+  // thumbnail endpoint is generally more permissive for public images
+  return `https://drive.google.com/thumbnail?id=${id}&sz=w1200`;
 }
 
 function buildShowCard(show, highlight = false) {
