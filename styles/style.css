@@ -8,6 +8,7 @@
   --accent-2: #eeb1ff;
   --stroke: rgba(255, 255, 255, 0.22);
   --shadow: 0 30px 90px rgba(0, 0, 0, 0.26);
+  --content-width: min(1180px, 94vw);
   font-family: "Manrope", "Nunito", "Trebuchet MS", "Helvetica Neue", sans-serif;
 }
 
@@ -28,7 +29,7 @@ body {
 
 .ambient { position: fixed; inset: -20%; background: radial-gradient(80% 80% at 50% 50%, rgba(255, 255, 255, 0.04), transparent 70%); filter: blur(120px); z-index: 0; pointer-events: none; }
 
-.page { position: relative; z-index: 1; width: min(1180px, 94vw); margin: 0 auto 80px; padding-top: 100px; }
+.page { position: relative; z-index: 1; width: var(--content-width); margin: 0 auto 80px; padding-top: 100px; }
 .topbar {
   position: fixed;
   top: 18px;
@@ -60,16 +61,17 @@ body {
   position: relative;
   overflow: hidden;
   border-radius: 28px;
-  min-height: 68vh;
+  min-height: 60vh;
   display: grid;
-  align-items: flex-end;
-  padding: 40px 32px 18px;
-  margin: -82px 0 10px;
+  align-items: center;
+  padding: 32px 28px 14px;
+  margin: -72px auto 12px;
   box-shadow: none;
   border: none;
   isolation: isolate;
+  width: var(--content-width);
 }
-.hero-full { width: 101vw; margin-left: calc(51% - 51vw); padding-bottom: 6vh; min-height: 68vh; }
+.hero-full { width: var(--content-width); margin-left: auto; margin-right: auto; padding-bottom: 4vh; min-height: 60vh; }
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -157,7 +159,9 @@ body {
 @media (max-width: 900px) {
   .topbar { width: 96vw; padding-inline: 12px; }
   .page { width: 100%; padding-inline: 14px; padding-top: 80px; }
-  .hero { padding: 40px 18px 24px; min-height: 90vh; margin-top: -80px; }
+  .hero { padding: 22px 16px 14px; min-height: 52vh; margin-top: -36px; align-items: center; width: 100%; }
+  .hero-full { width: 100vw; margin-left: calc(50% - 50vw); min-height: 52vh; }
+  .panel { margin-top: 32px; }
   .nav { gap: 8px; }
 }
 
@@ -166,6 +170,6 @@ body {
   .nav { position: absolute; top: 60px; right: 12px; background: rgba(48, 33, 82, 0.92); border: 1px solid var(--stroke); border-radius: 12px; padding: 10px; display: none; flex-direction: column; align-items: flex-start; gap: 6px; min-width: 160px; }
   .nav.open { display: flex; }
   .nav a { width: 100%; }
-  .panel { padding: 16px; }
-  .hero { padding-top: 36px; }
+  .panel { padding: 16px; margin-top: 24px; }
+  .hero { padding: 18px 14px 14px; min-height: 48vh; margin-top: -24px; }
 }
