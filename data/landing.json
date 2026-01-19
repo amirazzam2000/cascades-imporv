@@ -3,6 +3,12 @@
   "eyebrow": "",
   "description": "",
   "heroImage": "data/assets/logo2.svg",
+  "heroImages": {
+    "sm": "data/assets/logo2.svg",
+    "md": "data/assets/logo2.svg",
+    "lg": "data/assets/logo2.svg",
+    "xl": "data/assets/logo2.svg"
+  },
   "about": "This is the description ",
   "testimonials": [
     { "quote": "Felt like hanging out with hilarious friends who happened to make a show.", "name": "Maya P.", "context": "Audience" },

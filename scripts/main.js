@@ -143,11 +143,16 @@ async function renderLanding(site) {
   if (heroTitle) heroTitle.textContent = landing.title;
   if (heroEyebrow) heroEyebrow.textContent = landing.eyebrow;
   if (heroDescription) heroDescription.textContent = landing.description;
-  if (heroImage && landing.heroImage) {
-    heroImage.src = landing.heroImage;
+  if (heroImage) {
+    const { src, srcset } = buildHeroImageSources(landing);
+    heroImage.src = src;
+    if (srcset) {
+      heroImage.srcset = srcset;
+      heroImage.sizes = "(max-width: 720px) 100vw, (max-width: 900px) 100vw, min(1180px, 94vw)";
+    }
     heroImage.alt = `${landing.title} group photo`;
+    heroImage.loading = "eager";
   }
-  if (heroImage) heroImage.loading = "eager";
   if (primaryCta) {
     primaryCta.textContent = landing.ctaPrimary;
     primaryCta.href = landing.ctaPrimaryHref;
@@ -454,6 +459,28 @@ function extractGoogleDriveId(url) {
 function driveThumbnail(id) {
   // thumbnail endpoint is generally more permissive for public images
   return `https://drive.google.com/thumbnail?id=${id}&sz=w1200`;
+}
+
+function buildHeroImageSources(landing) {
+  const defaults = {
+    sm: landing.heroImage,
+    md: landing.heroImage,
+    lg: landing.heroImage,
+    xl: landing.heroImage
+  };
+  const sources = { ...defaults, ...(landing.heroImages || {}) };
+  const order = [
+    { key: "sm", width: 640 },
+    { key: "md", width: 900 },
+    { key: "lg", width: 1200 },
+    { key: "xl", width: 1600 }
+  ];
+  const srcset = order
+    .map(({ key, width }) => (sources[key] ? `${sources[key]} ${width}w` : ""))
+    .filter(Boolean)
+    .join(", ");
+  const fallbackSrc = sources.xl || sources.lg || sources.md || sources.sm || landing.heroImage || "data/assets/hero-cover.svg";
+  return { src: fallbackSrc, srcset: srcset || "" };
 }
 
 function buildShowCard(show, highlight = false) {
