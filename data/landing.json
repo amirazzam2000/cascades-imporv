@@ -9,7 +9,7 @@
     "lg": "data/assets/logo2.svg",
     "xl": "data/assets/logo2.svg"
   },
-  "about": "This is the description ",
+  "about": "We’re a group of friends who love improv and love making each other laugh. Using your suggestions and our own stories, we create fast, funny, totally made-up scenes that only exist for the moment.",
   "testimonials": [
     { "quote": "Felt like hanging out with hilarious friends who happened to make a show.", "name": "Maya P.", "context": "Audience" },
     { "quote": "They made up a full musical about my cat. I cried laughing.", "name": "Jordan V.", "context": "Regular" },
